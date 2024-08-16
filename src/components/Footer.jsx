@@ -1,7 +1,7 @@
 import React from "react";
 import wave from "../assets/wave.svg";
 
-export const Footer = () => {
+ const Footer = () => {
   return (
     <div
         width= "100%"
@@ -20,3 +20,4 @@ export const Footer = () => {
     </div>
   );
 };
+export default Footer;

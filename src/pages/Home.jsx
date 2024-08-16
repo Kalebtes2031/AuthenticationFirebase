@@ -11,13 +11,14 @@ function Home() {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
     });
-
+    
     return () => unsubscribe();
   }, []);
-
+  
+  console.log(user)
   const logout = async () => {
     await signOut(auth);
-    navigate("/");
+    navigate("/auth/login");
   };
 
   return (
