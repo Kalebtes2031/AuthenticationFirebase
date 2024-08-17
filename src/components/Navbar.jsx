@@ -4,7 +4,8 @@ import { FiLogOut } from "react-icons/fi";
 import { MdOutlineContactPhone } from "react-icons/md";
 import { useNavigate, Link } from "react-router-dom";
 import { IoPersonCircleOutline } from "react-icons/io5";
-
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase-config";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -12,9 +13,16 @@ const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
-  const handleLogOut = () => {
-    console.log("logged out")
+
+  const handleLogOut = async () => {
+    try {
+      await signOut(auth);
+      navigate("/auth/login"); // Navigate to the login page
+    } catch (error) {
+      console.error("Error signing out: ", error);
+    }
   };
+  
 
   const handleItemClick = (item, path) => {
     setActiveItem(item);
