@@ -18,7 +18,10 @@ function Home() {
   console.log(user)
   const logout = async () => {
     await signOut(auth);
-    navigate("/auth/login");
+    window.location.href ="/auth/login";
+    setTimeout(() => {
+      window.location.reload();
+  }, 50);
   };
 
   return (

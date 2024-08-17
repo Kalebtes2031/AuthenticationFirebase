@@ -5,10 +5,7 @@ import { Box } from "@chakra-ui/react";
 
 const Auth = () => {
   const routes = useRoutes([
-    {
-      path: "/auth",
-      element: <Navigate to="/login" />,
-    },
+   
     {
       path: "login",
       element: <Login />,

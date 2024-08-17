@@ -44,7 +44,8 @@ function Login() {
       console.log(user);
       navigate("/home"); // Redirect to Home page on successful login
     } catch (error) {
-      console.log(error.message);
+      console.error("Error code:", error.code);
+    console.error("Error message:", error.message);
     }
   };
   const inputRef = useRef(null);
