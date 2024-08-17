@@ -27,6 +27,7 @@ import {
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import Logo from "../../../assets/logopic.png";
 import { useForm } from "react-hook-form";
+import { useRef } from "react";
 
 function Login() {
   const [loginEmail, setLoginEmail] = useState("");
@@ -46,6 +47,15 @@ function Login() {
       console.log(error.message);
     }
   };
+  const inputRef = useRef(null);
+  const { isOpen, onToggle } = useDisclosure();
+
+  const onClickReveal = () => {
+      onToggle();
+      if (inputRef.current) {
+        inputRef.current.focus({ preventScroll: true });
+      }
+    };
 
   return (
     // <div>
@@ -84,18 +94,18 @@ function Login() {
           boxShadow={{ base: "none", sm: "md" }}
           borderRadius={{ base: "none", sm: "xl" }}
         >
-          <Stack spacing="6">
+          <Stack spacing="">
             <Flex justify="center">
               <Image
                 src={Logo}
-                height={"150px"}
-                transform="scale(0.7)"
-                onClick={() => navigate("/")}
+                height={"180px"}
+                transform="scale(1.2)"
+                onClick={() => navigate("/auth/login")}
               />
             </Flex>
 
             <Stack spacing={{ base: "2", md: "3" }} textAlign="center">
-              <Heading size={{ base: "sm", md: "md" }} color="brand.blue">
+              <Heading mt= "14px" size={{ base: "sm", md: "md" }} color="brand.blue">
                 Log in to your account
               </Heading>{" "}
             </Stack>
@@ -120,13 +130,21 @@ function Login() {
                 <FormControl isRequired>
                   <FormLabel htmlFor="password">Password</FormLabel>
                   <InputGroup>
-                    <InputRightElement>
-                      <IconButton variant="text" />
-                    </InputRightElement>
+                  <InputRightElement>
+                        <IconButton
+                          variant="text"
+                          aria-label={
+                            isOpen ? "Mask password" : "Reveal password"
+                          }
+                          icon={isOpen ? <HiEye /> : <HiEyeOff />}
+                          onClick={onClickReveal}
+                        />
+                      </InputRightElement>
                     <Input
                       id="password"
+                      ref={inputRef}
                       name="password"
-                      type="password"
+                      type={isOpen ? "text" : "password"}
                       required
                       placeholder="********"
                       onChange={(event) => setLoginPassword(event.target.value)}
